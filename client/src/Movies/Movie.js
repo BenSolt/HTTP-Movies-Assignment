@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import MovieCard from "./MovieCard";
+
 export default class Movie extends React.Component {
   constructor(props) {
     super(props);
@@ -36,13 +37,52 @@ export default class Movie extends React.Component {
       return <div>Loading movie information...</div>;
     }
 
+{/* ///////////////////////////////////////////////*/}
+{/* ///////////////////////////////////////////////*/}
+
+    const movie = this.props.items.find(
+      thing => `${thing.id}` === this.props.match.params.id
+    );
+
+{/* ///////////////////////////////////////////////*/}
+{/* ///////////////////////////////////////////////*/}
+    const deleteMovie = e => {
+      e.preventDefault();
+      axios
+        .delete(`http://localhost:3333/items/${movie.id}`)
+        .then(res => {
+          
+          this.props.updateItems(res.data);
+          this.props.history.push('/movie-list');
+        })
+        .catch(err => console.log(err));
+    };
+
+
+
     return (
       <div className="save-wrapper">
         <MovieCard movie={this.state.movie} />
         <div className="save-button" onClick={this.saveMovie}>
           Save
         </div>
+
+{/* ///////////////////////////////////////////////*/}
+{/* ///////////////////////////////////////////////*/}
+
+      <button
+        className="md-button"
+        onClick={() => this.props.history.push(`/update-movie/${movie.id}`)}
+      >
+        Edit
+      </button>
+
+      <button className="md-button" onClick={deleteMovie}>
+        Delete
+      </button>
+        
       </div>
+      
     );
   }
 }
