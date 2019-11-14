@@ -52,7 +52,7 @@ export default class Movie extends React.Component {
         .delete(`http://localhost:3333/items/${movie.id}`)
         .then(res => {
           
-          this.props.updateItems(res.data);
+          this.props.updateMovies(res.data);
           this.props.history.push('/movie-list');
         })
         .catch(err => console.log(err));
@@ -82,7 +82,7 @@ export default class Movie extends React.Component {
       </button>
         
       </div>
-      
+
     );
   }
 }
