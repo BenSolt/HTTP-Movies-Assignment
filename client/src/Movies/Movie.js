@@ -40,18 +40,18 @@ export default class Movie extends React.Component {
 {/* ///////////////////////////////////////////////*/}
 {/* ///////////////////////////////////////////////*/}
 
-    const movie = this.props.items.find(
-      thing => `${thing.id}` === this.props.match.params.id
-    );
+    // const movie = this.props.movies.find(
+    //   m => `${m.id}` === this.props.match.params.id
+    // );
 
 {/* ///////////////////////////////////////////////*/}
 {/* ///////////////////////////////////////////////*/}
     const deleteMovie = e => {
       e.preventDefault();
       axios
-        .delete(`http://localhost:3333/items/${movie.id}`)
+        .delete(`http://localhost:5000/api/movies/${this.state.movie.id}`)
         .then(res => {
-          
+          console.log(res.data)
           this.props.updateMovies(res.data);
           this.props.history.push('/movie-list');
         })
@@ -72,7 +72,7 @@ export default class Movie extends React.Component {
 
       <button
         className="md-button"
-        onClick={() => this.props.history.push(`/update-movie/${movie.id}`)}
+        onClick={() => this.props.history.push(`/update-movie/${this.state.movie.id}`)}
       >
         Edit
       </button>

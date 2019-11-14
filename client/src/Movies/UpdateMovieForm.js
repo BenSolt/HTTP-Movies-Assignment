@@ -11,49 +11,56 @@ const initialMovie = {
 
 
 const UpdateMovieForm = props => {
-    const [movie1, setMovie1] = useState(initialMovie);
-    const changeHandler = ev => {
-      ev.persist();
-      let value = ev.target.value;
-      if (ev.target.name === 'price') {
+    const [movie, setMovie] = useState(initialMovie);
+    const changeHandler = e => {
+      e.persist();
+      let value = e.target.value;
+      if (e.target.name === 'title') {
         value = parseInt(value, 10);
       }
-      setMovie1({
-        ...movie1,
-        [ev.target.title]: value
+      setMovie({
+        ...movie,
+        [e.target.title]: value
       });
     };
   
     useEffect(() => {
     
-      if (props.items.length > 0) {
-        const newMovie = props.items.find(
-          thing => `${thing.id}` === props.match.params.id
+      if (props.movies.length > 0) {
+        const newMovie = props.movies.find(
+          m => `${m.id}` === props.match.params.id
         );
         setMovie(newMovie);
       }
-    }, [props.items, props.match.params.id]);
+    }, [props.movies, props.match.params.id]);
   
     const handleSubmit = e => {
       // PUT request
       e.preventDefault();
       axios
-        .put(`http://localhost:5000/movies/${movie.id}`, movie)
+        .put(`http://localhost:5000/api/movies/${movie.id}`, movie)
+        
         .then(res => {
           props.updateMovies(res.data);
           props.history.push('/item-list');
         })
         .catch(err => console.log(err));
     };
-  
+
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+
     // loading state if we don't have data yet
-    if (props.items.length === 0) {
-      return <h2>Loading data...</h2>;
-    }
-  
+
+    // if (props.movies.length === 0) {
+    //   return <h2>Loading data...</h2>;
+    // }
+
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
     return (
       <div>
-        <h2>Update Item</h2>
+        <h2>Update Movie</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -89,10 +96,10 @@ const UpdateMovieForm = props => {
             placeholder="movie stars"
             value={movie.stars}
           />
-          <div className="baseline" />
+          
   
         
-          />
+         
           <div className="baseline" />
   
           <button className="md-button form-button">Update</button>
