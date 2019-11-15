@@ -37,15 +37,7 @@ export default class Movie extends React.Component {
       return <div>Loading movie information...</div>;
     }
 
-{/* ///////////////////////////////////////////////*/}
-{/* ///////////////////////////////////////////////*/}
 
-    // const movie = this.props.movies.find(
-    //   m => `${m.id}` === this.props.match.params.id
-    // );
-
-{/* ///////////////////////////////////////////////*/}
-{/* ///////////////////////////////////////////////*/}
     const deleteMovie = e => {
       e.preventDefault();
       axios
