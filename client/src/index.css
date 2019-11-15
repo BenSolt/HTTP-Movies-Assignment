@@ -75,3 +75,15 @@ body {
   color: red;
   text-align: center;
 }
+/* //////////////////////////////// */
+
+/* .inputform{
+ display: flex;
+} */
+
+.input{
+  padding: 12px;
+  margin: 5px;
+  border: 2px solid lightblue;
+  width: 200px;
+}
